@@ -23,4 +23,4 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/providers', 'ProvidersController.index')
 Route.post('/providers', 'ProvidersController.store')
 Route.get('/providers/:id', 'ProvidersController.show')
-Route.post('/providers/:id', 'ProvidersController.update')
+Route.patch('/providers/:id', 'ProvidersController.update')
