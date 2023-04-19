@@ -20,7 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', 'ProvidersController.index')
-Route.get('/', 'ProvidersController.store')
-Route.get('/', 'ProvidersController.show')
-Route.get('/', 'ProvidersController.update')
+Route.get('/providers', 'ProvidersController.index')
+Route.post('/providers', 'ProvidersController.store')
+Route.get('/providers/:id', 'ProvidersController.show')
+Route.post('/providers/:id', 'ProvidersController.update')
