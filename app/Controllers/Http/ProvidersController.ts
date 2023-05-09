@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Provider from 'App/Models/Provider'
 import { schema } from '@ioc:Adonis/Core/Validator'
+import ProviderValidator from 'App/Validators/ProviderValidator'
 
 export default class ProvidersController {
   public async index({ request, response }: HttpContextContract) {
@@ -11,12 +12,7 @@ export default class ProvidersController {
   }
 
   public async store({ request, response }: HttpContextContract) {
-    const validationSchema = schema.create({
-      name: schema.string(),
-    })
-    const data = await request.validate({
-      schema: validationSchema,
-    })
+    const data = await request.validate(ProviderValidator)
     const provider = await Provider.create(data)
     return response.status(200).json(provider)
   }
@@ -27,12 +23,7 @@ export default class ProvidersController {
   }
 
   public async update({ params, request, response }: HttpContextContract) {
-    const validationSchema = schema.create({
-      name: schema.string(),
-    })
-    const data = await request.validate({
-      schema: validationSchema,
-    })
+    const data = await request.validate(ProviderValidator)
     const provider = await Provider.findOrFail(params.id)
     provider.name = data.name
     await provider.save()
