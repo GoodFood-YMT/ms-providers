@@ -1,6 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Provider from 'App/Models/Provider'
-import { schema } from '@ioc:Adonis/Core/Validator'
 import ProviderValidator from 'App/Validators/ProviderValidator'
 
 export default class ProvidersController {
