@@ -11,13 +11,4 @@ export default class ProviderValidator {
   public messages: CustomMessages = {
     'name.required': 'Le nom est obligatoire',
   }
-
-  public validate() {
-    const data = this.ctx.request.only(['name'])
-    return this.ctx.request.validate({
-      schema: this.schema,
-      messages: this.messages,
-      data,
-    })
-  }
 }
