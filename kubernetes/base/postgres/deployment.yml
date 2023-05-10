@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-providers-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-providers-db
+  template:
+    metadata:
+      labels:
+        app: ms-providers-db
+    spec:
+      containers:
+        - name: ms-providers-db
+          image: postgres
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: ms-providers-db-config
+          volumeMounts:
+            - mountPath: /var/lib/postgres/data
+              name: db-data
+          resources: {}
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: ms-providers-db-volume-claim

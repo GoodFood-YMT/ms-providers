@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-providers
+  labels:
+    app: ms-providers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-providers
+  template:
+    metadata:
+      labels:
+        app: ms-providers
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: ms-providers-config
+            - secretRef:
+                name: ms-providers-secret
+          image: matthieug76120/ms-providers:latest
+          name: ms-providers
+          ports:
+            - containerPort: 3333
+          resources: {}
+      restartPolicy: Always
