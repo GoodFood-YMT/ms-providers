@@ -6,3 +6,5 @@ metadata:
     app: ms-providers-db
 data:
   POSTGRES_DB: ms-providers
+  POSTGRES_USER: api
+  POSTGRES_PASSWORD: postgres123

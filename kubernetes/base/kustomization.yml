@@ -11,7 +11,6 @@ resources:
   - ./postgres/persistent-volume.yml
   - ./postgres/service.yml
   - ./postgres/volume-claim.yml
-  - ./postgres/secret.yml
   - ./redis/configmap.yml
   - ./redis/deployment.yml
   - ./redis/service.yml

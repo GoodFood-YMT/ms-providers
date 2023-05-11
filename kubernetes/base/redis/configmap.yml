@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-providers-cache-config
+  labels:
+    app: ms-providers-cache
+data: {}

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-providers-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-providers-cache
+  template:
+    metadata:
+      labels:
+        app: ms-providers-cache
+    spec:
+      containers:
+        - name: ms-providers-cache
+          image: redis
+          ports:
+            - containerPort: 6379
+          envFrom:
+            - configMapRef:
+                name: ms-providers-cache-config
+          resources: {}
