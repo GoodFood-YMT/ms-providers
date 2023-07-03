@@ -22,7 +22,18 @@ spec:
                 name: ms-providers-secret
           image: matthieug76120/ms-providers:1.0
           name: ms-providers
+          command: ['/bin/sh']
+          args: ['-c', 'node ace migration:run --force;node ace db:seed;dumb-init node server.js']
           ports:
             - containerPort: 3333
           resources: {}
+      initContainers:
+        - name: check-db-ready
+          image: postgres:9.6.5
+          command:
+            [
+              'sh',
+              '-c',
+              'until pg_isready -h ms-providers-db -p 5432; do echo waiting for database; sleep 2; done;',
+            ]
       restartPolicy: Always
