@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, beforeCreate, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
+import ProvidersIngredient from 'App/Models/ProvidersIngredient'
 
 export default class Provider extends BaseModel {
   @column({ isPrimary: true })
@@ -10,13 +11,19 @@ export default class Provider extends BaseModel {
   public name: string
 
   @column()
-  public restaurant_id: string
+  public restaurantId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => ProvidersIngredient, {
+    foreignKey: 'providerId',
+    localKey: 'id',
+  })
+  public ingredients: HasMany<typeof ProvidersIngredient>
 
   @beforeCreate()
   public static async setId(provider: Provider) {
