@@ -108,7 +108,8 @@ export default class ProvidersController {
       }
 
       ingredientsData.push({
-        ...ingredient,
+        ingredientId: ingredient.ingredientId,
+        providerId: ingredient.providerId,
         name: ingredientData.name,
         quantity: ingredientData.quantity,
       })
