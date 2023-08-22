@@ -141,6 +141,15 @@ export default class ProvidersController {
       return response.status(400).json({ message: 'Ingredient not found' })
     }
 
+    const ingredientExists = await ProvidersIngredient.query()
+      .where('ingredient_id', '=', payload.ingredientId)
+      .andWhere('provider_id', '=', provider.id)
+      .first()
+
+    if (ingredientExists) {
+      return response.status(400).json({ message: 'Ingredient already exists' })
+    }
+
     const ingredient = await provider.related('ingredients').create({
       ingredientId: payload.ingredientId,
     })
