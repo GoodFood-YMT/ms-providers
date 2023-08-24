@@ -11,7 +11,11 @@ export default class CatalogApi {
     name: string
     quantity: number
   } | null> {
-    const response = await fetch(`${this.ENDPOINT}/${restaurantId}/ingredients/${ingredientId}`)
+    const response = await fetch(`${this.ENDPOINT}/ingredients/${ingredientId}`, {
+      headers: {
+        RestaurantID: restaurantId,
+      },
+    })
 
     if (response.ok) {
       return response.json() as Promise<{ id: string; name: string; quantity: number }>
