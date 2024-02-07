@@ -85,12 +85,7 @@ export default class ProvidersController {
       return response.status(400).json({ message: 'Unauthorized' })
     }
 
-    const page = request.input('page', 1)
-    const limit = 10
-
-    const ingredients = await ProvidersIngredient.query()
-      .where('provider_id', '=', provider.id)
-      .paginate(page, limit)
+    const ingredients = await ProvidersIngredient.query().where('provider_id', '=', provider.id)
 
     // Populate ingredients data
     const ingredientsData: {
@@ -100,7 +95,7 @@ export default class ProvidersController {
       quantity: number
     }[] = []
 
-    for (const ingredient of ingredients.all()) {
+    for (const ingredient of ingredients) {
       const ingredientData = await CatalogApi.getIngredient(restaurantId, ingredient.ingredientId)
 
       if (!ingredientData) {
@@ -116,7 +111,6 @@ export default class ProvidersController {
     }
 
     return {
-      meta: ingredients.getMeta(),
       data: ingredientsData,
     }
   }
